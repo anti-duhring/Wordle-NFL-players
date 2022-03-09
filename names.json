@@ -1,0 +1,12 @@
+{
+  "Mac Jones" :  {
+      "team": "New England Patriots",
+      "position": "Quarterback",
+      "jersey": "10"
+    },
+  "Davante Adams": {
+    "team": "Green Bay Packers",
+    "position": "Wide Receiver",
+    "jersey": "17"
+    }
+}

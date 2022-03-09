@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Wordle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/ball.png">
+</head>
+<body>
+  <div class="legend">
+    <div class="legend-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-square-text-fill" viewBox="0 0 16 16">
+      <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
+    </svg></div>
+    <div class="legend-bg legend-toggle hide-legend"></div>
+    <div class="legend-content legend-toggle hide-legend">
+      <p>Read the player stats above the keyboard and try to find who that player is. </p>
+      <p>Type the letters inside the box pressing the keys on your computer or using the virtual keyboard. When you finish press Enter.</p>
+      <p>If the box becomes <span class="green-legend">green</span> it means that you got the letter on the right spot, if becomes <span class="yellow-legend">yellow</span> it means that you got the letter but it is on the wrong spot, and if becomes <span class="red-legend">red</span> it means that you don't get the letter at all.</p>
+      <p>Developed by <a href="https://github.com/anti-duhring">@anti-duhring</a> inspired by Wordle</p>
+    </div>
+  </div>
+    <div class="alert-container" data-alert-container>
+    </div>
+    <div data-guess-grid class="guess-grid" >
+    </div>
+    <div class="player-stats" data-player>
+      <div class="player-stats-body">
+        <div class="player-legend">Who is this NFL player?</div>
+        <i></i>
+      </div>
+    </div>
+    <div data-keyboard class="keyboard">
+        <button class="key" data-key="Q">Q</button>
+        <button class="key" data-key="W">W</button>
+        <button class="key" data-key="E">E</button>
+        <button class="key" data-key="R">R</button>
+        <button class="key" data-key="T">T</button>
+        <button class="key" data-key="Y">Y</button>
+        <button class="key" data-key="U">U</button>
+        <button class="key" data-key="I">I</button>
+        <button class="key" data-key="O">O</button>
+        <button class="key" data-key="P">P</button>
+        <div class="space"></div>
+        <button class="key" data-key="A">A</button>
+        <button class="key" data-key="S">S</button>
+        <button class="key" data-key="D">D</button>
+        <button class="key" data-key="F">F</button>
+        <button class="key" data-key="G">G</button>
+        <button class="key" data-key="H">H</button>
+        <button class="key" data-key="J">J</button>
+        <button class="key" data-key="K">K</button>
+        <button class="key" data-key="L">L</button>
+        <div class="space"></div>
+        <button data-enter class="key large">Enter</button>
+        <button class="key" data-key="Z">Z</button>
+        <button class="key" data-key="X">X</button>
+        <button class="key" data-key="C">C</button>
+        <button class="key" data-key="V">V</button>
+        <button class="key" data-key="B">B</button>
+        <button class="key" data-key="N">N</button>
+        <button class="key" data-key="M">M</button>
+        <button data-delete class="key large">
+          <svg data-delete xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+            <path data-delete fill="var(--color-tone-1)" d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"></path>
+          </svg>
+        </button>
+        <button data-space class="key keyspace">SPACE</button>
+      </div>
+      <script src="targetWords.js"></script>
+      <script src="script.js"></script>
+      <script src="legend-script.js"></script>
+</body>
+</html>
