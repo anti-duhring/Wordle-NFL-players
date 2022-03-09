@@ -2,6 +2,8 @@
 Wordle game using only NFL players name.
 
 # Functionality 
+Every day a new player name is automatically setted.
+
 You can try the game here: https://wordle-nfl.netlify.app/
 
 PC view:
