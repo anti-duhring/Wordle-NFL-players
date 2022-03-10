@@ -8,18 +8,22 @@ const FLIP_ANIMATION_DURATION = 500;
 const DANCE_ANIMATION_DURATION = 500;
 let statsPlayer = namePlayer[1];
 let trys = 1;
+let orderPlayer = Math.floor(dayOffset);
 let finished = false;
 
     createTiles();
     checkStorage();
     showStats();
     
-
+function setStorage(value) {
+    localStorage.setItem('trys', value)
+}
 function createTiles(){
     const amount = namePlayer[0].length;
-    document.querySelector('.guess-grid').style.gridTemplateColumns = 'repeat('+amount+', 4em)';
+    const space = namePlayer[0].indexOf(' ');
+    console.log('Amount',amount)
+    //document.querySelector('.guess-grid').style.gridTemplateColumns = 'repeat('+amount+', 4em)';
     for(let i = 1; i <= amount; i++){
-        console.log(i)
         document.querySelector('[data-guess-grid]').innerHTML += '<div class="tile" ></div>';
     }
 }
@@ -35,23 +39,35 @@ function showStats(){
 
 function checkStorage(){
     if(!localStorage.getItem('trys')) {
-        localStorage.setItem('trys', trys)
-        console.log(localStorage.getItem('trys'));
+        setStorage(trys);
+        localStorage.setItem('player', orderPlayer)
+        console.log(localStorage.getItem('trys'), localStorage.getItem('player'));
         startInteraction()
         return
     }
-    if(Number(localStorage.getItem('trys')) <= 3){
-        console.log(localStorage.getItem('trys'));
+    if(Number(localStorage.getItem('trys')) <= 5){
+        console.log(localStorage.getItem('trys'), localStorage.getItem('player'));
         console.log('You can try again', localStorage.getItem('trys'));
         startInteraction()
+        return
     }
-    else if(Number(localStorage.getItem('trys')) == 6){
-        console.log(localStorage.getItem('trys'));
+    else if(Number(localStorage.getItem('trys')) == 10 && Number(localStorage.getItem('player'))==orderPlayer){
+        console.log(localStorage.getItem('trys'), localStorage.getItem('player'));
         showAlert('You already won, try your skills again tomorrow', null)
+        document.querySelector('.player-legend').textContent = 'The player is '+namePlayer[0];
+        return
     }
-    else{
-        console.log(localStorage.getItem('trys'));
-        showAlert('You already played 3 times, try again tomorrow', null)
+    else if (Number(localStorage.getItem('trys')) > 5 && Number(localStorage.getItem('player'))==orderPlayer){
+        console.log(localStorage.getItem('trys'), localStorage.getItem('player'));
+        showAlert('You already played 5 times, try again tomorrow', null)
+        return
+    }
+    else if (Number(localStorage.getItem('trys')) > 5 && Number(localStorage.getItem('player'))!=orderPlayer){
+        setStorage(trys);
+        localStorage.setItem('player', orderPlayer)
+        console.log(localStorage.getItem('trys'), localStorage.getItem('player'));
+        startInteraction()
+        return
     }
 }
 
@@ -89,7 +105,7 @@ function handleKeyPress(e) {
 }
 
 function handleMouseClick(e) {
-    console.log(e.target)
+  
     if(e.target.matches('[data-space]')){
         spaceKey()
         return 
@@ -232,18 +248,18 @@ function shakeTiles(tiles){
 }
 
 function checkWinLose(guess, tiles) {
-    localStorage.setItem('trys', Number(localStorage.getItem('trys')) + 1);
-        console.log(Number(localStorage.getItem('trys')))
+    setStorage(Number(localStorage.getItem('trys')) + 1);
     if (guess == namePlayer[0].toLocaleLowerCase()){
-        showAlert('You got it! The player is '+namePlayer[0], 5000)
+        showAlert('You won!', 5000)
+        document.querySelector('.player-legend').textContent = 'The player is '+namePlayer[0];
         danceTiles(tiles)
-        localStorage.setItem('trys',6);
+        setStorage(10);
         removeInteraction()
         return
     }
     else if (guess != namePlayer[0].toLocaleLowerCase()){
-        if(Number(localStorage.getItem('trys')) > 3){
-            showAlert('You already played 3 times, try again tomorrow', null)
+        if(Number(localStorage.getItem('trys')) > 5){
+            showAlert('You already played 5 times, try again tomorrow', null)
             showAlert('You lose!', null)
             
         }
@@ -270,7 +286,7 @@ function danceTiles(tiles){
 function tryAgain(){
     var AllTiles = [...getAllTiles()]
    
-    if(Number(localStorage.getItem('trys')) <= 3 && finished==true) {
+    if(Number(localStorage.getItem('trys')) <= 5 && finished==true) {
                 AllTiles.forEach((tile, index) => {
                 tile.classList.remove('wrong')
                 tile.classList.remove('correct')

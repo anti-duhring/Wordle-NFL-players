@@ -24,12 +24,14 @@ body {
 }
 .keyboard {
     display: grid;
-    grid-template-columns: repeat(20, minmax(auto, 1.25em));
+    grid-template-columns: repeat(20, minmax(auto, 2em));
     grid-auto-rows: 3em;
     gap: .25em;
     justify-content: center;
+    width: 100vmin;
 }
 .key{
+    cursor: pointer;
     font-size: inherit;
     grid-column: span 2;
     padding: 0;
@@ -81,8 +83,8 @@ body {
     justify-content: center;
     align-content: center;
     flex-grow: .5;
-    grid-template-columns: repeat(9, 4em);
-    grid-template-rows: repeat(1, 4em);
+    grid-template-columns: repeat(8, 4em);
+    grid-template-rows: repeat(3, 4em);
     gap: .25em;
     margin-bottom: 1em;
     margin-top: 7em;
@@ -227,7 +229,7 @@ body {
 
 .player-stats-body i {
        position:absolute;
-       top: -1.8em;
+       top: -30px;
        left: 50%;
        width: 2em;
        height: 1em;
@@ -244,7 +246,7 @@ body {
     top: 20%;
     color: white;
     left: 35%;
-    height: 60vmin;
+    height: 65vmin;
     width: 60vmin;
     padding: 1em;
     z-index: 999;
