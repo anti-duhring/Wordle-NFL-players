@@ -12,9 +12,9 @@ PC view:
 
 Mobile view:
 
-![4](https://user-images.githubusercontent.com/99638905/157501338-6f0a66ab-c004-4f82-bb80-29d6fa667028.png)
-
+![5](https://user-images.githubusercontent.com/99638905/157709741-f7d18b04-4508-4dd8-9075-c0fad2844699.png)
 
 # Architecture and Technology
 
 - JavaScript, HTML and CSS
+- Twitter Web API
