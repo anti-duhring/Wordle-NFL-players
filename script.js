@@ -151,6 +151,7 @@ function deleteKey(){
     lastTile.textContent = '';
     delete lastTile.dataset.state
     delete lastTile.dataset.letter
+    lastTile.classList.remove('spaceTile')
 }
 
 function submitGuess() {
@@ -297,7 +298,7 @@ function tryAgain(){
             });
             document.querySelector('[data-alert-container]').innerHTML=''
             finished=false;
-
+            return
         
         
     }
