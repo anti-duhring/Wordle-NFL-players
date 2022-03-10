@@ -182,7 +182,6 @@ body {
     align-items: center;
 }
 .alert {
-    pointer-events: none;
     background-color: #ab194d;
     padding: .75em;
     border-radius: .25em;
@@ -190,6 +189,7 @@ body {
     transition: opacity 500ms ease-in-out;
     margin-bottom: .5em;
     color: white;
+    text-align: center;
 }
 .alert:last-child {
     margin-bottom: 0;
@@ -197,7 +197,9 @@ body {
 .alert.hide {
     opacity: 0;
 }
-
+div#container-tt {
+    margin-top: 15px;
+}
 .player-stats {
     background: #ab194d;
     color: white;

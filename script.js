@@ -226,7 +226,7 @@ function getAllTiles(){
 function showAlert(message, duration = 1000) {
     const alertContainer = document.querySelector('[data-alert-container]')
     const alert = document.createElement('div')
-    alert.textContent = message
+    alert.innerHTML = message
     alert.classList.add('alert')
     alertContainer.prepend(alert)
     if (duration == null) return
@@ -252,6 +252,8 @@ function checkWinLose(guess, tiles) {
     setStorage(Number(localStorage.getItem('trys')) + 1);
     if (guess == namePlayer[0].toLocaleLowerCase()){
         showAlert('You won!', 5000)
+        showAlert('Share your result! <div id="container-tt"></div>', null)
+        generateTwitterButton('won');
         document.querySelector('.player-legend').textContent = 'The player is '+namePlayer[0];
         danceTiles(tiles)
         setStorage(10);
@@ -260,9 +262,10 @@ function checkWinLose(guess, tiles) {
     }
     else if (guess != namePlayer[0].toLocaleLowerCase()){
         if(Number(localStorage.getItem('trys')) > 5){
-            showAlert('You already played 5 times, try again tomorrow', null)
-            showAlert('You lose!', null)
-            
+            showAlert('You already played 5 times, try again tomorrow.', 5000)
+            showAlert('You lose!', 5000)
+            showAlert('Share your result! <div id="container-tt"></div>', null)
+            generateTwitterButton('lose');
         }
         else{
         showAlert('Try again by pressing Enter', null)
@@ -271,6 +274,39 @@ function checkWinLose(guess, tiles) {
             finished=true;
             startInteraction()
     }
+}
+
+function generateTwitterButton(result){
+    const tiles = []
+    const tryShare = Number(localStorage.getItem('trys')) - 1;
+    let textResult = 'Acertei em '+tryShare+' tentativas.'
+    if(result == 'lose'){
+        textResult = 'Gastei minhas 5 tentativas.'
+    }
+    
+    document.querySelectorAll('.tile[data-state]').forEach((element, index, array) => {
+        if(element.getAttribute('data-state')=='wrong'){
+            tiles.push('🟥')
+        }
+        else if(element.getAttribute('data-state')=='wrong-location'){
+            tiles.push('🟨')
+        }
+        else if(element.getAttribute('data-state')=='correct'){
+            tiles.push('🟩')
+        }
+    })
+    twttr.widgets.createShareButton(
+        '/',
+        document.getElementById('container-tt'),
+        {
+            size: 'large',
+          text: `Joguei NFL Wordle!!
+`+textResult+`
+Consegue adivinhar qual é o o jogador?
+
+`+ tiles.join('')
+        }
+      );
 }
 
 function danceTiles(tiles){
