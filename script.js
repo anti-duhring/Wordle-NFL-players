@@ -296,7 +296,7 @@ function generateTwitterButton(result){
         }
     })
     twttr.widgets.createShareButton(
-        '/',
+        'https://wordle-nfl.netlify.app/',
         document.getElementById('container-tt'),
         {
             size: 'large',
